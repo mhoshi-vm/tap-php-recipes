@@ -18,6 +18,7 @@ if(getenv('SERVICE_BINDING_ROOT') != ""){
         if (is_dir($sbName)) {
             $sbContents = scandir($sbName);
             foreach ($sbContents as $content) {
+                echo $content;
                 if ($content == "type" &&
                     is_file($sbName . '/' . $content) &&
                     file_get_contents($sbName . '/' . $content) == "postgresql"
@@ -26,7 +27,7 @@ if(getenv('SERVICE_BINDING_ROOT') != ""){
                     $db_port = file_get_contents($sbName . '/port');
                     $db_username = file_get_contents($sbName . '/username');
                     $db_password = file_get_contents($sbName . '/password');
-                    $db_database = file_get_contents($sbName . '/password');
+                    $db_database = file_get_contents($sbName . '/database');
                 }
 
             }

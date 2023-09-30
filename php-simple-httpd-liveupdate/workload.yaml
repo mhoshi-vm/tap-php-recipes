@@ -1,0 +1,15 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  labels:
+    app.kubernetes.io/part-of: php-apps
+    apps.tanzu.vmware.com/workload-type: web
+  name: php-simple-httpd-live
+spec:
+  build:
+    env:
+      - name: BP_PHP_SERVER
+        value: httpd
+  params:
+    - name: clusterBuilder
+      value: full-jammy
