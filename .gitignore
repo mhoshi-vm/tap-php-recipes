@@ -1,2 +1,4 @@
 /.idea/
 /tap-php-recipes.iml
+/*/vendor/*
+/*/.phpunit.result.cache

@@ -13,3 +13,7 @@ spec:
   params:
     - name: clusterBuilder
       value: full-jammy
+    - name: annotations
+      value:
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "1"

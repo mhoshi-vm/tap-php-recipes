@@ -1,0 +1,12 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  labels:
+    app.kubernetes.io/part-of: php-apps
+    apps.tanzu.vmware.com/workload-type: web
+    apps.tanzu.vmware.com/has-tests: true
+  name: php-simple-unit-test
+spec:
+  params:
+    - name: clusterBuilder
+      value: full-jammy

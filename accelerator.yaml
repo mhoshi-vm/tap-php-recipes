@@ -1,0 +1,41 @@
+accelerator:
+  displayName: TAP PHP Recipies
+  description: "TAP PHP App Acclerator "
+  iconUrl: https://www.php.net/images/logos/new-php-logo.svg
+  tags:
+    - simple
+    - php-recipies
+  options:
+    - name: interfaceType
+      inputType: select
+      label: Choose PHP Framework
+      choices:
+        - value: php-simple
+          text: "Webアプリケーションのデプロイ"
+        - value: php-simple-httpd
+          text: "HTTPD Webアプリケーションのデプロイ"
+        - value: php-simple-unit-test
+          text: "テスト&スキャンのスクリプトの登録"
+        - value: php-simple-w-supported-bindings
+          text: "Service Bindings 連携(Session）の確認"
+        - value: php-simple-w-custom-bindings
+          text: "Service Bindings 連携(カスタム）の確認"
+        - value: php-simple-httpd-liveupdate
+          text: "HTTPD WebアプリケーションのLive Update"
+      defaultValue: php-simple
+      required: true
+engine:
+  merge:
+    - include: [ "php-simple/*" ]
+      condition: "#interfaceType == 'php-simple'"
+    - include: [ "php-simple-httpd/*" ]
+      condition: "#interfaceType == 'php-simple-httpd'"
+    - include: [ "php-simple-unit-test/*" ]
+      condition: "#interfaceType == 'php-simple-unit-test'"
+    - include: [ "php-simple-w-supported-bindings/*" ]
+      condition: "#interfaceType == 'php-simple-w-supported-bindings'"
+    - include: [ "php-simple-w-custom-bindings/*" ]
+      condition: "#interfaceType == 'php-simple-w-custom-bindings'"
+    - include: [ "php-simple-httpd-liveupdate/*" ]
+      exclude: [ "config/*.yaml" ]
+      condition: "#interfaceType == 'php-simple-httpd-liveupdate'"
