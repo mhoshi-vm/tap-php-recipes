@@ -35,13 +35,19 @@ if(getenv('SERVICE_BINDING_ROOT') != ""){
         }
     }
 }
-$connectionString = "host=$db_host dbname=$db_database user=$db_username password=$db_password port=$db_port";
-echo $connectionString . "<br>";
-$con = pg_connect($connectionString);
-$sql = "SELECT version();";
-$result = pg_send_query($con, $sql);
-echo $result . "<br>";
-pg_close($con)
+
+$dsn = "pgsql:dbname=$db_database host=$db_host port=$db_port";
+
+try{
+    $dbh = new PDO($dsn, $db_username, $db_password);
+
+    $sql = "SELECT version();";
+    echo $dbh->exec($sql);
+}catch (PDOException $e){
+    print('Error:'.$e->getMessage());
+    die();
+}
+$dbh = null;
 ?>
 </body>
 </html>
