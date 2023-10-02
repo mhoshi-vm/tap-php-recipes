@@ -5,11 +5,12 @@
 </head>
 <body>
 <?php
-$db_host="";
-$db_port="";
-$db_username="";
-$db_password="";
-$db_database="";
+$db_host = getenv('PG_HOST');
+$db_port = getenv('PG_PORT');
+$db_database = getenv('PG_NAME');
+$db_username = getenv('PG_USERNAME');
+$db_password = getenv('PG_PASSWORD');
+
 if(getenv('SERVICE_BINDING_ROOT') != ""){
     $sbRoot = getenv('SERVICE_BINDING_ROOT');
     $sbDirs = scandir($sbRoot);
@@ -42,7 +43,9 @@ try{
     $dbh = new PDO($dsn, $db_username, $db_password);
 
     $sql = "SELECT version();";
-    echo $dbh->exec($sql);
+    foreach ($dbh->query($sql) as $row) {
+        print($row['version']);
+    }
 }catch (PDOException $e){
     print('Error:'.$e->getMessage());
     die();
