@@ -4,9 +4,9 @@ namespace tappoc;
 
 class HelloWorld
 {
-    public function respond(String $input)
+    public static function respond(String $input)
     {
-        $world = "World";
+        $world = "World!";
         if ($input !== "" && $input !== null){
             $world = $input;
         }

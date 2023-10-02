@@ -12,7 +12,7 @@ class HelloWorldTest extends TestCase
     }
 
     public function testNoInput(){
-        $this->assertEquals("Hello World", $this->HelloWorld->respond(""));
+        $this->assertEquals("Hello World!", $this->HelloWorld->respond(""));
     }
 
     public function testInput(){

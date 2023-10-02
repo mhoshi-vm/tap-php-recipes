@@ -5,6 +5,7 @@
 </head>
 <body>
 <?php
+require 'vendor/autoload.php';
 use tappoc\HelloWorld;
 
 $input="";
