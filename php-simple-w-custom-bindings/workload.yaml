@@ -11,10 +11,10 @@ spec:
       value: "/bindings"
   params:
     - name: clusterBuilder
-      value: full-jammy-pgsql
+      value: full-jammy
   serviceClaims:
     - name: postgres
       ref:
         apiVersion: services.apps.tanzu.vmware.com/v1alpha1
         kind: ClassClaim
-        name: default-claim
+        name: tap-eks-w01-s002-claim

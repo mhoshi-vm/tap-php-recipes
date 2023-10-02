@@ -19,7 +19,6 @@ if(getenv('SERVICE_BINDING_ROOT') != ""){
         if (is_dir($sbName)) {
             $sbContents = scandir($sbName);
             foreach ($sbContents as $content) {
-                echo $content;
                 if ($content == "type" &&
                     is_file($sbName . '/' . $content) &&
                     file_get_contents($sbName . '/' . $content) == "postgresql"
