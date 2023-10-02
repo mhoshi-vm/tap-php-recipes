@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: php-apps
     apps.tanzu.vmware.com/workload-type: web
-  name: php-simple-w-sup-bindings
+  name: php-simple-w-supported-bindings
 spec:
   env:
     - name: SERVICE_BINDING_ROOT
@@ -17,4 +17,4 @@ spec:
       ref:
         apiVersion: services.apps.tanzu.vmware.com/v1alpha1
         kind: ClassClaim
-        name: default-redis-claim
+        name: redis-claim

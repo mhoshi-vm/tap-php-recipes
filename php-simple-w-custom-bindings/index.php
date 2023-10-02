@@ -11,27 +11,26 @@ $db_database = getenv('PG_NAME');
 $db_username = getenv('PG_USERNAME');
 $db_password = getenv('PG_PASSWORD');
 
-if(getenv('SERVICE_BINDING_ROOT') != ""){
-    $sbRoot = getenv('SERVICE_BINDING_ROOT');
-    $sbDirs = scandir($sbRoot);
-    foreach ($sbDirs as $sbDir) {
-        $sbName = $sbRoot . '/' . $sbDir;
-        if (is_dir($sbName)) {
-            $sbContents = scandir($sbName);
-            foreach ($sbContents as $content) {
+$sb_root = getenv('SERVICE_BINDING_ROOT');
+if($sb_root !== null && $sb_root !== "" ){
+    $sb_root = getenv('SERVICE_BINDING_ROOT');
+    $sb_dirs = scandir($sb_root);
+    foreach ($sb_dirs as $sb_dir) {
+        $sb_name = $sb_root . '/' . $sb_dir;
+        if (is_dir($sb_name)) {
+            $sb_contents = scandir($sb_name);
+            foreach ($sb_contents as $content) {
                 if ($content == "type" &&
-                    is_file($sbName . '/' . $content) &&
-                    file_get_contents($sbName . '/' . $content) == "postgresql"
+                    is_file($sb_name . '/' . $content) &&
+                    file_get_contents($sb_name . '/' . $content) === "postgresql"
                 ){
-                    $db_host = file_get_contents($sbName . '/host');
-                    $db_port = file_get_contents($sbName . '/port');
-                    $db_username = file_get_contents($sbName . '/username');
-                    $db_password = file_get_contents($sbName . '/password');
-                    $db_database = file_get_contents($sbName . '/database');
+                    $db_host = file_get_contents($sb_name . '/host');
+                    $db_port = file_get_contents($sb_name . '/port');
+                    $db_username = file_get_contents($sb_name . '/username');
+                    $db_password = file_get_contents($sb_name . '/password');
+                    $db_database = file_get_contents($sb_name . '/database');
                 }
-
             }
-
         }
     }
 }
