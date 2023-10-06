@@ -12,6 +12,9 @@ spec:
   params:
     - name: clusterBuilder
       value: full-jammy
+    - name: annotations
+      value:
+        autoscaling.knative.dev/minScale: "3"
   serviceClaims:
     - name: redis
       ref:

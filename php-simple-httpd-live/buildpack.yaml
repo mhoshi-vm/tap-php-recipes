@@ -1,0 +1,56 @@
+apiVersion: kpack.io/v1alpha2
+kind: ClusterBuildpack
+metadata:
+  name: my-watchexec
+spec:
+  serviceAccountRef:
+    name: kp-default-repository-serviceaccount
+    namespace: kpack
+  image: gcr.io/paketo-buildpacks/watchexec:2.8.5
+---
+apiVersion: kpack.io/v1alpha2
+kind: ClusterBuilder
+metadata:
+  name: php-liveupdate
+spec:
+  serviceAccountRef:
+    name: kp-default-repository-serviceaccount
+    namespace: kpack
+  stack:
+    kind: ClusterStack
+    name: full-jammy
+  store: {}
+  tag: harbor.cl01.lespaulstudioplus.info/tap/full-deps-package-repo:php-liveupdate
+  order:
+  - group:
+    - id: tanzu-buildpacks/deprecation-warnings
+      optional: true
+    - id: paketo-buildpacks/ca-certificates
+      optional: true
+    - id: tanzu-buildpacks/php-dist
+    - id: tanzu-buildpacks/composer
+      optional: true
+    - id: tanzu-buildpacks/composer-install
+      optional: true
+    - id: tanzu-buildpacks/httpd
+    - id: tanzu-buildpacks/php-fpm
+    - id: tanzu-buildpacks/php-httpd
+    - id: tanzu-buildpacks/php-memcached-session-handler
+      optional: true
+    - id: tanzu-buildpacks/php-redis-session-handler
+      optional: true
+    - id: paketo-buildpacks/watchexec
+      optional: true
+    - id: tanzu-buildpacks/php-start
+    - id: paketo-buildpacks/procfile
+      optional: true
+    - id: paketo-buildpacks/environment-variables
+      optional: true
+    - id: paketo-buildpacks/image-labels
+      optional: true
+    - id: paketo-buildpacks/appdynamics
+      optional: true
+    - id: paketo-buildpacks/dynatrace
+      optional: true
+    - id: paketo-buildpacks/new-relic
+      optional: true

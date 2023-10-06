@@ -6,14 +6,15 @@
 <body>
 <?php
 require 'vendor/autoload.php';
-use tappoc\HelloWorld;
+
+$HelloWorld = new tappoc\HelloWorld();
 
 $input="";
 if (isset($_GET['input'])) {
     $input = $_GET['input'];
 }
 
-echo HelloWorld::respond($input);
+echo $HelloWorld->respond($input);
 
 ?>
 </body>

@@ -12,8 +12,11 @@ spec:
         value: httpd
   params:
     - name: clusterBuilder
-      value: full-jammy
+      value: php-liveupdate
+    - name: live-update
+      value: "true"
     - name: annotations
       value:
         autoscaling.knative.dev/minScale: "1"
         autoscaling.knative.dev/maxScale: "1"
+
