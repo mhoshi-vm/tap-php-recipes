@@ -53,7 +53,7 @@ engine:
             - text: php-apps
               with: "#artifactId"
     - include: [ "php-simple-httpd-live/*" ]
-      condition: "#interfaceType == 'php-simple-httpd-liveupdate'"
+      condition: "#interfaceType == 'php-simple-httpd-live'"
       chain:
         - type: ReplaceText
           substitutions:
