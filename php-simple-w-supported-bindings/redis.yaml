@@ -5,3 +5,69 @@ metadata:
 spec:
   classRef:
     name: redis-unmanaged
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretTemplate
+metadata:
+  name: claim-to-php-redis-session
+spec:
+  serviceAccountName: claim-reader
+  inputResources:
+    - name: claim
+      ref:
+        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+        kind: ClassClaim
+        name: redis-claim
+    - name: secret
+      ref:
+        apiVersion: v1
+        kind: Secret
+        name: $(.claim.status.binding.name)
+  template:
+    type: php-redis-session
+    stringData:
+      type: php-redis-session
+    data:
+      host: $(.secret.data.host)
+      port: $(.secret.data.port)
+      password: $(.secret.data.password)
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: claim-reader
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: claim-reader
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - "services.apps.tanzu.vmware.com"
+    resources:
+      - classclaim
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: claim-reader
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: claim-reader
+subjects:
+  - kind: ServiceAccount
+    name: claim-reader
