@@ -12,4 +12,4 @@ spec:
         value: httpd
   params:
     - name: clusterBuilder
-      value: full-jammy
+      value: php-liveupdate
