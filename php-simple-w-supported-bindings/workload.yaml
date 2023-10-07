@@ -15,9 +15,9 @@ spec:
     - name: annotations
       value:
         autoscaling.knative.dev/minScale: "3"
-  serviceClaims:
+  resourceClaims:
     - name: redis
       ref:
-        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
-        kind: ClassClaim
-        name: redis-claim
+        apiVersion: v1
+        kind: Secret
+        name: claim-to-php-redis-session
