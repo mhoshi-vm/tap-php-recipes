@@ -54,7 +54,7 @@ rules:
   - apiGroups:
       - "services.apps.tanzu.vmware.com"
     resources:
-      - classclaim
+      - classclaims
     verbs:
       - get
       - list
