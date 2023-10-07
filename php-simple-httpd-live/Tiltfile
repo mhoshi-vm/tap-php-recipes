@@ -7,7 +7,7 @@ k8s_custom_deploy(
                " && kubectl get workload php-simple-httpd-live -o yaml",
     delete_cmd="tanzu apps workload delete -f workload.yaml --yes",
     container_selector='workload',
-    deps=['./htdocs/'],
+    deps=['./'],
     live_update=[
     sync('.', '/workspace')
   ]
