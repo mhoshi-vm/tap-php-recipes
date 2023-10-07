@@ -16,11 +16,9 @@ accelerator:
           text: "HTTPD Webアプリケーションのデプロイ"
         - value: php-simple-unit-test
           text: "テスト&スキャンのスクリプトの登録"
-        - value: php-simple-w-supported-bindings
-          text: "Service Bindings 連携(Session）の確認"
         - value: php-simple-w-custom-bindings
-          text: "Service Bindings 連携(カスタム）の確認"
-        - value: php-simple-httpd-liveupdate
+          text: "Service Bindings 連携の確認"
+        - value: php-simple-httpd-live
           text: "HTTPD WebアプリケーションのLive Update"
       defaultValue: php-simple
       required: true
@@ -28,14 +26,36 @@ engine:
   merge:
     - include: [ "php-simple/*" ]
       condition: "#interfaceType == 'php-simple'"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: php-apps
+              with: "#artifactId"
     - include: [ "php-simple-httpd/*" ]
       condition: "#interfaceType == 'php-simple-httpd'"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: php-apps
+              with: "#artifactId"
     - include: [ "php-simple-unit-test/*" ]
       condition: "#interfaceType == 'php-simple-unit-test'"
-    - include: [ "php-simple-w-supported-bindings/*" ]
-      condition: "#interfaceType == 'php-simple-w-supported-bindings'"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: php-apps
+              with: "#artifactId"
     - include: [ "php-simple-w-custom-bindings/*" ]
       condition: "#interfaceType == 'php-simple-w-custom-bindings'"
-    - include: [ "php-simple-httpd-liveupdate/*" ]
-      exclude: [ "config/*.yaml" ]
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: php-apps
+              with: "#artifactId"
+    - include: [ "php-simple-httpd-live/*" ]
       condition: "#interfaceType == 'php-simple-httpd-liveupdate'"
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: php-apps
+              with: "#artifactId"
