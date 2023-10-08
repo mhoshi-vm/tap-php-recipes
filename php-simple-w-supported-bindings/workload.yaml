@@ -14,9 +14,8 @@ spec:
       value: full-jammy
     - name: buildServiceBindings
       value:
-      - name: php-redis-session
-        secretRef:
-           name: claim-to-php-redis-session
+      - name: claim-to-php-redis-session
+        kind: Secret
     - name: annotations
       value:
         autoscaling.knative.dev/minScale: "3"
